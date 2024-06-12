@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy PHP app to Azure Web App - myWebAppUsing-PHP-GitHub
+name: Deploy Web App (PHP)
 
 on:
   push:
@@ -32,13 +32,13 @@ jobs:
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip html5up-massively.zip ./* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: php-app
-          path: release.zip
+          path: html5up-massively.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -54,7 +54,7 @@ jobs:
           name: php-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip html5up-massively.zip
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
